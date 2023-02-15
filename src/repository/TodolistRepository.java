@@ -9,5 +9,5 @@ public interface TodolistRepository {
     boolean isNumberAvailable(int nomor);
     boolean remove(int nomor);
     Todolist[] searchTodo(String keyword);
-    Todolist[] sortTodo();
+    void sortTodo(String typeSort);
 }
