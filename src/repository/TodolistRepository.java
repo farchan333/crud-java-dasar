@@ -3,11 +3,11 @@ package repository;
 import entity.Todolist;
 
 public interface TodolistRepository {
-    Todolist[] getAllTodo();
-    void addTodo(Todolist todolist);
-    boolean editTodo (int nomor, Todolist todolist);
-    boolean isNumberAvailable(int nomor);
-    boolean remove(int nomor);
-    Todolist[] searchTodo(String keyword);
+    Todolist[] getAllTodo(); //berhasil
+    void addTodo(Todolist todolist); //berhasil
+    boolean editTodo (int nomor, Todolist todolist); //berhasil
+    boolean isNumberAvailable(int nomor); //berhasil
+    boolean remove(int nomor); //berhasil
+    Todolist[] searchTodo(String keyword);//berhasil
     void sortTodo(String typeSort);
 }

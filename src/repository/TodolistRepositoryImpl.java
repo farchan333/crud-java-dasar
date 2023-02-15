@@ -37,7 +37,7 @@ public class TodolistRepositoryImpl implements TodolistRepository {
 
     @Override
     public boolean isNumberAvailable(int nomor) {
-        return (nomor > 0 && nomor < todolists.length) || todolists[nomor-1]!= null;
+        return (nomor > 0 && nomor < todolists.length-1) && todolists[nomor-1]!= null;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class TodolistRepositoryImpl implements TodolistRepository {
             for (int i = nomor-1; i < todolists.length ; i++) {
                 if (i < todolists.length-1){
                     todolists[i] = todolists[i+1];
-                }todolists[i] = null;
+                }else todolists[i] = null;
             }
             return true;
         }return false;
@@ -63,25 +63,26 @@ public class TodolistRepositoryImpl implements TodolistRepository {
     @Override
     public Todolist[] searchTodo(String keyword) {
         List<Todolist> todolistList = new ArrayList<>();
-        for (int i = 0; i < todolists.length; i++) {
+        for (int i = 0; i < todolists.length && todolists[i]!= null; i++) {
             if (todolists[i].getTodo().contains(keyword)){
                 todolistList.add(todolists[i]);
             }
         }
         return todolistList.toArray(new Todolist[]{});
     }
-
     @Override
     public void sortTodo(String typeSort) {
         for (int i = 0; i < todolists.length; i++) {
             for (int j = i+1; j < todolists.length; j++) {
-                if (typeSort.contains("asc")){
-                    if (todolists[i].getTodo().compareTo(todolists[j].getTodo()) > 0){
-                        sort(i,j);
-                    }
-                }else {
-                    if (todolists[i].getTodo().compareTo(todolists[j].getTodo()) <= 0){
-                        sort(i,j);
+                if (todolists[i] != null && todolists[j] != null) {
+                    if (typeSort.contains("asc")) {
+                        if (todolists[i].getTodo().compareTo(todolists[j].getTodo()) > 0) {
+                            sort(i, j);
+                        }
+                    } else if(typeSort.contains("desc")) {
+                        if (todolists[i].getTodo().compareTo(todolists[j].getTodo()) <= 0) {
+                            sort(i, j);
+                        }
                     }
                 }
             }
